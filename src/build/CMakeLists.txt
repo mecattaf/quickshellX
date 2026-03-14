@@ -15,6 +15,12 @@ else()
 	set(CRASH_HANDLER_DEF 0)
 endif()
 
+if (WEBENGINE)
+	set(WEBENGINE_DEF 1)
+else()
+	set(WEBENGINE_DEF 0)
+endif()
+
 configure_file(build.hpp.in build.hpp @ONLY ESCAPE_QUOTES)
 
 target_include_directories(quickshell-build INTERFACE ${CMAKE_CURRENT_BINARY_DIR})

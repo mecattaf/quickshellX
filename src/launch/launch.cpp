@@ -31,6 +31,10 @@
 #include "../crash/handler.hpp"
 #endif
 
+#if WEBENGINE
+#include <qtwebenginequickglobal.h>
+#endif
+
 namespace qs::launch {
 
 namespace {
@@ -74,6 +78,7 @@ int launch(const LaunchArgs& args, char** argv, QCoreApplication* coreApplicatio
 		bool nativeTextRendering = false;
 		bool desktopSettingsAware = true;
 		bool useSystemStyle = false;
+		bool useWebEngine = false;
 		QString iconTheme = qEnvironmentVariable("QS_ICON_THEME");
 		QHash<QString, QString> envOverrides;
 		QString appId = qEnvironmentVariable("QS_APP_ID");
@@ -115,7 +120,8 @@ int launch(const LaunchArgs& args, char** argv, QCoreApplication* coreApplicatio
 				pragmas.stateDir = pragma.sliced(9).trimmed();
 			} else if (pragma.startsWith("CacheDir ")) {
 				pragmas.cacheDir = pragma.sliced(9).trimmed();
-			} else {
+			} else if (pragma == "UseWebEngine") pragmas.useWebEngine = true;
+			else {
 				qCritical() << "Unrecognized pragma" << pragma;
 				return -1;
 			}
@@ -229,7 +235,13 @@ int launch(const LaunchArgs& args, char** argv, QCoreApplication* coreApplicatio
 	delete coreApplication;
 
 	QGuiApplication* app = nullptr;
-	auto qArgC = 0;
+	auto qArgC = 1; // argv[0] must be valid; Chromium requires it, Qt won't consume it
+
+#if WEBENGINE
+	if (pragmas.useWebEngine) {
+		QtWebEngineQuick::initialize();
+	}
+#endif
 
 	if (pragmas.useQApplication) {
 		app = new QApplication(qArgC, argv);
