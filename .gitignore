@@ -5,6 +5,8 @@
 # build files
 /result
 /build/
+/build-*/
+/test-webengine/
 /compile_commands.json
 
 # clangd

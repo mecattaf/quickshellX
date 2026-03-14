@@ -20,4 +20,8 @@ qs_add_pchset(launch
 
 qs_pch(quickshell-launch SET launch)
 
+if (WEBENGINE)
+	target_link_libraries(quickshell-launch PRIVATE Qt::WebEngineQuick)
+endif()
+
 target_link_libraries(quickshell PRIVATE quickshell-launch)
