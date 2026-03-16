@@ -31,9 +31,7 @@
 #include "../crash/handler.hpp"
 #endif
 
-#if WEBENGINE
-#include <qtwebenginequickglobal.h>
-#endif
+#include "../webengine/webengine.hpp"
 
 namespace qs::launch {
 
@@ -96,6 +94,7 @@ int launch(const LaunchArgs& args, char** argv, QCoreApplication* coreApplicatio
 			else if (pragma == "NativeTextRendering") pragmas.nativeTextRendering = true;
 			else if (pragma == "IgnoreSystemSettings") pragmas.desktopSettingsAware = false;
 			else if (pragma == "RespectSystemStyle") pragmas.useSystemStyle = true;
+			else if (pragma == "UseWebEngine") pragmas.useWebEngine = true;
 			else if (pragma.startsWith("IconTheme ")) pragmas.iconTheme = pragma.sliced(10);
 			else if (pragma.startsWith("Env ")) {
 				auto envPragma = pragma.sliced(4);
@@ -117,8 +116,7 @@ int launch(const LaunchArgs& args, char** argv, QCoreApplication* coreApplicatio
 				pragmas.stateDir = pragma.sliced(9).trimmed();
 			} else if (pragma.startsWith("CacheDir ")) {
 				pragmas.cacheDir = pragma.sliced(9).trimmed();
-			} else if (pragma == "UseWebEngine") pragmas.useWebEngine = true;
-			else {
+			} else {
 				qCritical() << "Unrecognized pragma" << pragma;
 				return -1;
 			}
@@ -231,11 +229,9 @@ int launch(const LaunchArgs& args, char** argv, QCoreApplication* coreApplicatio
 	QGuiApplication* app = nullptr;
 	auto qArgC = 1; // argv[0] must be valid; Chromium requires it, Qt won't consume it
 
-#if WEBENGINE
 	if (pragmas.useWebEngine) {
-		QtWebEngineQuick::initialize();
+		qs::web_engine::init();
 	}
-#endif
 
 	if (pragmas.useQApplication) {
 		app = new QApplication(qArgC, argv);

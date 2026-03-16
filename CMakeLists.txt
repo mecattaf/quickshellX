@@ -81,14 +81,6 @@ boption(SERVICE_UPOWER "UPower" ON)
 boption(SERVICE_NOTIFICATIONS "Notifications" ON)
 boption(BLUETOOTH "Bluetooth" ON)
 boption(NETWORK "Network" ON)
-boption(WEBENGINE "WebEngine" ON)
-
-if (WEBENGINE_effective AND USE_JEMALLOC_effective)
-	message(FATAL_ERROR "WEBENGINE and USE_JEMALLOC are incompatible. "
-		"Chromium's PartitionAlloc conflicts with jemalloc. "
-		"Set -DUSE_JEMALLOC=OFF to use WebEngine.")
-endif()
-
 include(cmake/install-qml-module.cmake)
 include(cmake/util.cmake)
 
@@ -142,10 +134,6 @@ endif()
 
 if (DBUS)
 	list(APPEND QT_FPDEPS DBus)
-endif()
-
-if (WEBENGINE_effective)
-	list(APPEND QT_FPDEPS WebEngineQuick)
 endif()
 
 find_package(Qt6 REQUIRED COMPONENTS ${QT_FPDEPS})
