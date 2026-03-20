@@ -1,6 +1,6 @@
 # QuickshellX
 
-QuickshellX is a fork of [Quickshell](https://github.com/outfoxxed/quickshell) that adds QtWebEngine and QtWebChannel support, enabling web-based desktop shell UIs (SolidJS/TypeScript/CSS) rendered inside Wayland layer-shell surfaces.
+QuickshellX is a fork of [Quickshell](https://github.com/quickshell-mirror/quickshell) that adds QtWebEngine and QtWebChannel support, enabling web-based desktop shell UIs (SolidJS/TypeScript/CSS) rendered inside Wayland layer-shell surfaces.
 
 ## Fork changes
 
@@ -80,7 +80,7 @@ Note: If the existing spec uses `VENDOR_CPPTRACE=ON`, keep it. If it relies on a
 The fork touches 5 files with small, isolated changes. To pull upstream:
 
 ```bash
-git remote add upstream https://github.com/outfoxxed/quickshell.git
+git remote add upstream https://github.com/quickshell-mirror/quickshell.git
 git fetch upstream
 git rebase upstream/master
 ```
