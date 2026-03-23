@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: transparent;
+  font-family: "Inter", "SF Pro", system-ui, sans-serif;
+  color: #e0e0e0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 2rem;
+  background: rgba(10, 10, 14, 0.85);
+  backdrop-filter: blur(24px);
+  user-select: none;
+}
+
+.clock {
+  font-size: 5rem;
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.clock .sep {
+  opacity: 0.4;
+  margin: 0 0.05em;
+}
+
+.clock .dim {
+  opacity: 0.35;
+  font-size: 3rem;
+}
+
+.date {
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.5;
+  letter-spacing: 0.03em;
+}
+
+.status-bar {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.badge.standalone {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.badge.connected {
+  background: rgba(80, 200, 120, 0.15);
+  color: rgba(80, 200, 120, 0.8);
+}
+
+.badge.vol {
+  background: rgba(100, 150, 255, 0.12);
+  color: rgba(100, 150, 255, 0.8);
+}
