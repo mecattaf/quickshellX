@@ -154,7 +154,7 @@ entity's `src/webengine/webengine.hpp` — the entire implementation:
 namespace qs::web_engine {
 inline bool init() {
     using InitializeFunc = void (*)();
-    QLibrary lib("Qt6WebEngineQuick");
+    QLibrary lib("Qt6WebEngineQuick", 6);
     if (!lib.load()) {
         qWarning() << "Failed to load library:" << lib.errorString();
         printNotLoaded();
@@ -492,7 +492,7 @@ static void initWebEngine() { QtWebEngineQuick::initialize(); }
 // Dynamic loading fallback (upstream-compatible, no hard dep)
 #include <qlibrary.h>
 static void initWebEngine() {
-    QLibrary lib("Qt6WebEngineQuick");
+    QLibrary lib("Qt6WebEngineQuick", 6);
     if (!lib.load()) {
         qWarning() << "QtWebEngineQuick not found:" << lib.errorString();
         return;

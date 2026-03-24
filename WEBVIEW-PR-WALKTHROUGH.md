@@ -109,7 +109,7 @@ namespace qs::web_engine {
 inline bool init() {
 	using InitializeFunc = void (*)();
 
-	QLibrary lib("Qt6WebEngineQuick");
+	QLibrary lib("Qt6WebEngineQuick", 6);
 	if (!lib.load()) {
 		qWarning() << "Failed to load library:" << lib.errorString();
 		qWarning() << "You might need to install the necessary package for Qt6WebEngineQuick.";
